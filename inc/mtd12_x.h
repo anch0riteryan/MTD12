@@ -19,7 +19,7 @@
 #include <intel_fan.h>
 #include <bldc.h>
 
-#define MODBUS_DATA_TABLE_SIZE 25
+#define MODBUS_DATA_TABLE_SIZE 40
 
 typedef struct _routine {
 	uint8_t _1hz : 1;
@@ -27,13 +27,6 @@ typedef struct _routine {
 	uint8_t _100hz : 1;
 } Routine;
 extern Routine task;
-
-typedef struct _input {
-	uint16_t radio_ppm; // ppm signal pulse length 1uS/LSB
-	int16_t radio_input;
-
-	uint16_t radiator_rpm;
-} Input;
 
 typedef union _position_feedback {
 	struct {
@@ -56,39 +49,32 @@ typedef struct _monitor {
 	// ntc temperature (0.1 degC/LSB)
 	int16_t temp_motor;
 	int16_t temp_sink;
+} Monitor;
+
+typedef struct _control {
+	uint16_t radiator_curr;
+	uint16_t radiator_targ;
+} Control;
+
+typedef struct _system {
+	RadioInput radio;
+	Monitor monitor;
+	Control control;
+
+	uint16_t mode;
+	uint16_t is_on;
+	uint16_t error;
+	uint16_t is_ccw;
+	uint16_t is_starting;
+	uint16_t step;
+
+	uint16_t *input_value;
+
+	uint16_t rpm_curr, rpm_targ;
 
 	// hall-sensor
 	PosFeedback hall;
 	PosFeedback emf;
-
-	// motor
-	uint16_t mot_rpm;
-	uint16_t mot_commuatation_interval;
-
-} Monitor;
-
-typedef struct _control {
-	// output type select
-	// 0: pwm driven
-	// 1: rpm driven
-	uint16_t output_select; 
-
-	// pwm 0-100.0% (0.1%/LSB)
-	uint16_t output_curr;
-	uint16_t output_targ;
-
-	uint16_t radiator_curr;
-	uint16_t radiator_targ;
-
-	//
-
-
-} Control;
-
-typedef struct _system {
-	Input input;
-	Monitor monitor;
-	Control control;
 
 	void (*loop) (void ); // main loop
 } System;

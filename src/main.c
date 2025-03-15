@@ -7,6 +7,9 @@ System mtd;
 Modbus modbus; // Modbus instance
 
 int main (void ) {
+
+	//
+
 	init_pinout ();
 	init_nvm ();
 	init_clock ();
@@ -31,6 +34,8 @@ int main (void ) {
 		init_parameters ();
 	}
 
+	init_brushless_motor ();
+
 	NVIC_EnableIRQ (EIC_IRQn);
 	NVIC_EnableIRQ (DMAC_IRQn);
 	NVIC_EnableIRQ (AC_IRQn);
@@ -50,7 +55,13 @@ int main (void ) {
 			mtd.monitor.vin = adc_get_vin ();
 			mtd.monitor.temp_sink = adc_get_temp_sink ();
 
-			//
+			mtd.radio.value = radio_calc_fullscale (mtd.radio.ppm_length);
+
+			if (mtd.is_on) {
+				PORT_REGS->GROUP[0].PORT_OUTCLR = 1 << 28;
+			} else {
+				PORT_REGS->GROUP[0].PORT_OUTSET = 1 << 28;
+			}
 
 			task._10hz = 0;
 		}

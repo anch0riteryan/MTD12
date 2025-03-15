@@ -1,7 +1,9 @@
 #include <radio_ppm.h>
 
-uint16_t radio_calc_fullscale (uint16_t len_ppm) {
-	return 0;
+int16_t radio_calc_fullscale (uint16_t len_ppm) {
+	int16_t value = (int16_t ) (RADIO_FULLSCALE * radio_calc_fullscale_norm (len_ppm));
+
+	return value;
 }
 
 float_t radio_calc_fullscale_norm (uint16_t len_ppm) {

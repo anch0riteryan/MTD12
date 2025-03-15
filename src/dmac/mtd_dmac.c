@@ -33,7 +33,7 @@ void init_dmac () {
 	DMA_DESCRIPTOR[0].DMAC_DSTADDR = DMAC_DSTADDR_DSTADDR ((uint32_t) &tsens_buf);
 	dmac_setup_channel (0, DMAC_CHCTRLB_TRIGSRC_TSENS_Val);
 
-	DMA_DESCRIPTOR[1].DMAC_DSTADDR = DMAC_DSTADDR_DSTADDR ((uint32_t) &mtd.input.radio_ppm);
+	DMA_DESCRIPTOR[1].DMAC_DSTADDR = DMAC_DSTADDR_DSTADDR ((uint32_t) &mtd.radio.ppm_length);
 	dmac_setup_channel (1, DMAC_CHCTRLB_TRIGSRC_TCC2_MC0_Val);
 
 	if (DSU_REGS->DSU_STATUSB & DSU_STATUSB_DBGPRES (1)) {

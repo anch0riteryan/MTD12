@@ -8,6 +8,8 @@ uint16_t modbus_port_get_register_value (uint16_t reg) {
 
 	if (reg < PARAMETER_SYSTEM_SIZE) {
 		value = *(parameter_mtd + reg);
+	} else if (reg < (PARAMETER_SYSTEM_SIZE + MODBUS_DATA_TABLE_SIZE)) {
+		value = **(modbus_data_table + (reg - PARAMETER_SYSTEM_SIZE));
 	}
 
 	return value;
