@@ -17,6 +17,7 @@
 #define PARAM_STARTUP_FAULT_TIME (*(parameter_mtd + 22))
 
 void init_parameters (void );
+uint16_t parameter_get (uint16_t );
 uint8_t parameter_is_signeture_exist (void );
 void parameter_set_default (void );
 void parameter_load (void );

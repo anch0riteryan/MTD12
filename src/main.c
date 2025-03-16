@@ -7,9 +7,6 @@ System mtd;
 Modbus modbus; // Modbus instance
 
 int main (void ) {
-
-	//
-
 	init_pinout ();
 	init_nvm ();
 	init_clock ();
@@ -38,6 +35,8 @@ int main (void ) {
 
 	NVIC_EnableIRQ (EIC_IRQn);
 	NVIC_EnableIRQ (DMAC_IRQn);
+	NVIC_EnableIRQ (TCC1_IRQn);
+	NVIC_EnableIRQ (TC0_IRQn);
 	NVIC_EnableIRQ (AC_IRQn);
 	NVIC_EnableIRQ (SERCOM3_IRQn);
 	NVIC_SetPriority (SysTick_IRQn, 0);
@@ -48,20 +47,31 @@ int main (void ) {
 	usart_enable (SERCOM3_REGS);
 	adc_enable ();
 
+	mtd.control.radiator_rpm = 800;
+
 	while (1) {
 		//mtd.loop ();
 
+		if (mtd.is_on) {
+			if (mtd.is_starting) {
+				mtd.output_curr = parameter_get (25);
+			} else {
+				mtd.output_curr = mtd.radio.value;
+			}
+
+		} else {
+			mtd.output_curr = 0;
+			bldc_set_lo_side_pwm (0);
+			bldc_set_hi_side_pwm (0);
+		}
+
 		if (task._10hz) {
-			mtd.monitor.vin = adc_get_vin ();
+			mtd.monitor.v_in = adc_get_vin ();
 			mtd.monitor.temp_sink = adc_get_temp_sink ();
 
 			mtd.radio.value = radio_calc_fullscale (mtd.radio.ppm_length);
 
-			if (mtd.is_on) {
-				PORT_REGS->GROUP[0].PORT_OUTCLR = 1 << 28;
-			} else {
-				PORT_REGS->GROUP[0].PORT_OUTSET = 1 << 28;
-			}
+			intel_fan_set_pwm (mtd.control.radiator_rpm);
 
 			task._10hz = 0;
 		}

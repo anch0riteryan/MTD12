@@ -39,7 +39,8 @@ typedef union _position_feedback {
 
 typedef struct _monitor {
 	// main voltage input (0.1V/LSB)
-	uint16_t vin;
+	uint16_t v_in;
+	uint16_t v_motor;
 
 	// low side current (0.1A/LSB)
 	uint16_t current_phase_a;
@@ -54,6 +55,7 @@ typedef struct _monitor {
 typedef struct _control {
 	uint16_t radiator_curr;
 	uint16_t radiator_targ;
+	uint16_t radiator_rpm;
 } Control;
 
 typedef struct _system {
@@ -63,18 +65,26 @@ typedef struct _system {
 
 	uint16_t mode;
 	uint16_t is_on;
-	uint16_t error;
-	uint16_t is_ccw;
 	uint16_t is_starting;
+	uint16_t is_ccw;
+	uint16_t error;
 	uint16_t step;
 
-	uint16_t *input_value;
+	int16_t *input_value;
 
 	uint16_t rpm_curr, rpm_targ;
+	uint16_t output_curr, output_targ;
+
+	// startup
+	uint16_t startup_counter;
+	uint16_t startup_time;
+	uint16_t startup_interval;
 
 	// hall-sensor
 	PosFeedback hall;
 	PosFeedback emf;
+
+	uint16_t a_cnt, b_cnt, c_cnt;
 
 	void (*loop) (void ); // main loop
 } System;

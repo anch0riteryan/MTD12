@@ -7,12 +7,15 @@
 
 void bldc_tick (void );
 
-void bldc_commuation (void );
+void bldc_software_commutation_enable (void );
+void bldc_software_commutation_disable (void );
+void bldc_setup_software_commutation (uint32_t );
+
+void bldc_commutation (void );
 void bldc_update_driver (void );
 void bldc_enable_current_comparator (void );
 void bldc_disable_current_comparator (void );
-void bldc_start_deadtime_counter (void );
-void bldc_stop_deadtime_counter (void );
+void bldc_setup_deadtime_counter (uint32_t );
 void bldc_set_hi_side_pwm (uint16_t );
 void bldc_set_lo_side_pwm (uint16_t );
 void init_brushless_motor (void );
