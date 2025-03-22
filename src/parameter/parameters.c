@@ -42,14 +42,14 @@ void parameter_set_default () {
 	parameter_mtd[18] = 0;
 	parameter_mtd[19] = 0;
 	
-	parameter_mtd[20] = 150;
+	parameter_mtd[20] = 150; // start ppm threshold
 	parameter_mtd[21] = 100;
-	parameter_mtd[22] = 10; // startup init rpm
-	parameter_mtd[23] = 450; // startup target rpm
-	parameter_mtd[24] = 900; // startup time
+	parameter_mtd[22] = 12; // startup init rpm
+	parameter_mtd[23] = 600; // startup target rpm
+	parameter_mtd[24] = 600; // startup time
 
-	parameter_mtd[25] = 250;
-	parameter_mtd[26] = 200;
+	parameter_mtd[25] = 150; // start up pwm output
+	parameter_mtd[26] = 150; // start target pwm output
 	parameter_mtd[27] = 30;
 	parameter_mtd[28] = 0;
 	parameter_mtd[29] = 1000;

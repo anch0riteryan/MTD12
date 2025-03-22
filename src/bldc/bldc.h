@@ -7,6 +7,9 @@
 
 void bldc_tick (void );
 
+void bldc_start_phase_time_counter (void );
+void bldc_stop_phase_time_counter (void );
+void bldc_get_phase_time (void );
 void bldc_software_commutation_enable (void );
 void bldc_software_commutation_disable (void );
 void bldc_setup_software_commutation (uint32_t );

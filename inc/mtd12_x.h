@@ -47,6 +47,11 @@ typedef struct _monitor {
 	uint16_t current_phase_b;
 	uint16_t current_phase_c;
 
+	//
+	uint16_t phase_time_a;
+	uint16_t phase_time_b;
+	uint16_t phase_time_c;
+
 	// ntc temperature (0.1 degC/LSB)
 	int16_t temp_motor;
 	int16_t temp_sink;
@@ -66,6 +71,7 @@ typedef struct _system {
 	uint16_t mode;
 	uint16_t is_on;
 	uint16_t is_starting;
+	uint16_t is_stable;
 	uint16_t is_ccw;
 	uint16_t error;
 	uint16_t step;

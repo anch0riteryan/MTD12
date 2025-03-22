@@ -54,7 +54,8 @@ int main (void ) {
 
 		if (mtd.is_on) {
 			if (mtd.is_starting) {
-				mtd.output_curr = parameter_get (25);
+				mtd.output_curr = parameter_get (25); // 固定啟動功率
+				//mtd.output_curr = mtd.radio.value;
 			} else {
 				mtd.output_curr = mtd.radio.value;
 			}
@@ -74,15 +75,6 @@ int main (void ) {
 			intel_fan_set_pwm (mtd.control.radiator_rpm);
 
 			task._10hz = 0;
-		}
-
-		if (AC_REGS->AC_STATUSB & AC_STATUSB_READY0 (1)) {
-		}
-
-		if (AC_REGS->AC_STATUSB & AC_STATUSB_READY1 (1)) {
-		}
-
-		if (AC_REGS->AC_STATUSB & AC_STATUSB_READY2 (1)) {
 		}
 
 		modbus.routine ();
