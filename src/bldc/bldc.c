@@ -3,15 +3,6 @@
 
 uint32_t bldc_phase_time[6] = {0, 0, 0, 0, 0, 0};
 
-void bldc_start_phase_time_counter () {
-}
-
-void bldc_stop_phase_time_counter () {
-}
-
-void bldc_get_phase_time () {
-}
-
 void bldc_software_commutation_enable () {
 	TCC1_REGS->TCC_CTRLA |= TCC_CTRLA_ENABLE (1);
 	while (TCC1_REGS->TCC_SYNCBUSY & TCC_SYNCBUSY_ENABLE(1));
@@ -65,14 +56,6 @@ void bldc_setup_deadtime_counter (uint32_t uS) {
 
 	TC0_REGS->COUNT32.TC_CTRLBSET = TC_CTRLBSET_CMD_RETRIGGER;
 	while (TC0_REGS->COUNT32.TC_SYNCBUSY & TC_SYNCBUSY_CTRLB (1));
-}
-
-void bldc_set_hi_side_pwm (uint16_t value) {
-	TCC0_REGS->TCC_CC[0] = TCC_CC_CC (value);
-}
-
-void bldc_set_lo_side_pwm (uint16_t value) {
-	TCC0_REGS->TCC_CC[1] = TCC_CC_CC (value);
 }
 
 void init_brushless_motor () {
