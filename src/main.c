@@ -62,8 +62,8 @@ int main (void ) {
 
 		} else {
 			mtd.output_curr = 0;
-			bldc_set_lo_side_pwm (0);
-			bldc_set_hi_side_pwm (0);
+			//bldc_set_lo_side_pwm (0);
+			//bldc_set_hi_side_pwm (0);
 		}
 
 		if (task._10hz) {

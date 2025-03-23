@@ -23,25 +23,8 @@ void bldc_port_set_lo_side_pwm (uint16_t value) {
 }
 
 void bldc_port_comparator () {
-	switch (mtd.step) {
-		case 0:
-		case 3:
-			mtd.c_cnt ++;
-			break;
-		case 1:
-		case 4:
-			mtd.b_cnt ++;
-			break;
-		case 2:
-		case 5:
-			mtd.a_cnt ++;
-			break;
-		default:
-			break;
-	}
-
-	bldc_set_lo_side_pwm (0);
-	bldc_set_hi_side_pwm (0);
+	//bldc_set_lo_side_pwm (0);
+	//bldc_set_hi_side_pwm (0);
 	TCC1_REGS->TCC_CTRLBSET = TCC_CTRLBCLR_CMD_RETRIGGER;
 	while (TCC1_REGS->TCC_SYNCBUSY & TCC_SYNCBUSY_CTRLB (1));
 

@@ -31,8 +31,8 @@ void bldc_commutation () {
 
 	// update output PATT
 	bldc_update_driver ();
-	bldc_set_lo_side_pwm (1000);
-	bldc_set_hi_side_pwm (mtd.output_curr);
+	//bldc_set_lo_side_pwm (1000);
+	//bldc_set_hi_side_pwm (mtd.output_curr);
 }
 
 void bldc_update_driver () {

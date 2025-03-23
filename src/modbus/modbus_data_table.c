@@ -38,17 +38,16 @@ uint16_t *modbus_data_table [MODBUS_DATA_TABLE_SIZE] = {
 	&(mtd.startup_interval),
 	(uint16_t *) &dummy_value,
 	(uint16_t *) &dummy_value,
-	
-	&(mtd.a_cnt),
-	&(mtd.b_cnt),
-	&(mtd.c_cnt),
+
+	(uint16_t *) &dummy_value,
+	(uint16_t *) &dummy_value,
+	(uint16_t *) &dummy_value,
 	&(mtd.monitor.phase_time_a),
 	&(mtd.monitor.phase_time_b),
-	
+
 	&(mtd.monitor.phase_time_c),
 	(uint16_t *) &dummy_value,
 	(uint16_t *) &dummy_value,
 	(uint16_t *) &dummy_value,
 	(uint16_t *) &dummy_value,
-	
 };

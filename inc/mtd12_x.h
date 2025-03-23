@@ -90,8 +90,6 @@ typedef struct _system {
 	PosFeedback hall;
 	PosFeedback emf;
 
-	uint16_t a_cnt, b_cnt, c_cnt;
-
 	void (*loop) (void ); // main loop
 } System;
 extern System mtd;
